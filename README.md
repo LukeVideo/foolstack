@@ -1,2 +1,0 @@
-# foolstack
-Created with CodeSandbox
