@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Level from "./Level";
+
 import Otto from "../media/ottoColor1.png";
 
 const Game = () => {
@@ -12,6 +14,7 @@ const Game = () => {
       <p>
         This is really early stage... <b /> Click Otto to complete the level
       </p>
+      <Level />
     </div>
   );
 };

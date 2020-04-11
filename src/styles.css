@@ -17,6 +17,40 @@ a {
   color: white;
 }
 
+.level {
+  height: 300px;
+  width: 400px;
+  background-color: lightgrey;
+}
+
+.player {
+  width: 256px;
+  height: 256px;
+  background-image: url("https://uploads.codesandbox.io/uploads/user/b3907da5-f238-468e-95d6-6c1b7ef60599/pf4P-ottoWalkAndIdleTransp.png");
+  background-position: 0px 256px
+}
+@keyframes play {
+  from {
+    background-position: 0px 0px;
+  }
+  to {
+    background-position: -768px 0px;
+  }
+}
+.dirRight{
+  transform: scaleX(-1);
+  animation: play 0.6s steps(3) infinite;
+}
+.dirLeft{
+  animation: play 0.6s steps(3) infinite;
+}
+.right{
+  transform: scaleX(-1);
+}
+
+.left{
+  transform: scaleX(1);
+}
 /* font-family: 'Permanent Marker', cursive;
 font-family: 'Creepster', cursive;
 font-family: 'Faster One', cursive;
