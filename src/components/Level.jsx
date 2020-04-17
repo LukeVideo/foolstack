@@ -1,70 +1,45 @@
 import React, { useState, useEffect } from "react";
 
 import useKey from "../utils/useKey";
+import useMultiKey from "../utils/useMultiKey";
 
 const Level = () => {
-  const left = useKey("ArrowLeft");
-  const right = useKey("ArrowRight");
+  const leftKey = useKey("ArrowLeft");
+  const rightKey = useKey("ArrowRight");
+  const [idledir, setIdledir] = useState("right");
 
-  const [idleDirection, setIdleDirection] = useState("right");
-  const [classes, setClasses] = useState({
-    player: "player",
-    dir: "",
-    idle: "right"
-  });
-
-  const playerClasses = () => {
-    const classesStr = Object.values(classes).join(" ");
-    console.log(Object.values(classes));
-    console.log(classesStr);
-    // if (left && !classes.includes("dirRight")){
-    //   if (!classes.includes("dirLeft")){
-    //     setClasses([...classes,
-    //               "dirLeft"])
-    //   }
-    // }
-
-    // console.log(classes)
-    // if (right && !classes.includes("dirLeft")){
-    //   if (!classes.includes("dirRight")){
-    //     setClasses([...classes,
-    //       "dirRight"])
-    //   }
-    // console.log(classes)
-
-    // }
-    // else if (!right && !left){
-    //   if (!classes.includes(idleDirection))
-    //   setClasses([...classes,
-    //       idleDirection])
-    // }
-    return classesStr;
+  const handleDir = e => {
+    if (idledir !== e) {
+      setIdledir(e);
+      console.log(`idledir ${idledir}`);
+    }
   };
 
-  /*
+  const keysPressed = useMultiKey();
 
-  */
+  //console.log(keysPressed);
 
-  useEffect(() => {
-    if (left) {
-      setClasses({ ...classes, dir: "dirLeft", idle: "left" });
-    } else {
-      setClasses({ ...classes, dir: "" });
+  /*  if (leftKey) {
+    handleDir("left");
+  }
+
+  if (rightKey) {
+    handleDir("right");
+  }
+*/
+  const playerClasses = () => {
+    if (keysPressed[keysPressed.length - 1] === "ArrowRight") {
+      return `player ${idledir} dirRight`;
     }
-    console.log(classes);
-  }, [left]);
-
-  useEffect(() => {
-    if (right) {
-      setClasses({ ...classes, dir: "dirRight", idle: "right" });
-    } else {
-      setClasses({ ...classes, dir: "" });
-    }
-    console.log(classes);
-  }, [right]);
+    return `player ${idledir} `;
+  };
 
   return (
     <div className="level">
+      <p>
+        {leftKey && "left"}
+        {rightKey && "right"}
+      </p>
       <div className={playerClasses()} />
     </div>
   );
