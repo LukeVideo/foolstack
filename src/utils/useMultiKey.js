@@ -3,22 +3,29 @@ import { useState, useEffect } from "react";
 export default function useMultiKey() {
   const [keysPressed, setKeyPressed] = useState([]);
 
-  function downHandler({ key }) {
+
+  useEffect(() => {
+  function downHandler({key}) {
+    console.log("DOWN");
+    console.log(key)
     if (!keysPressed.includes(key)) {
       setKeyPressed(keysPressed.push(key));
-      //  console.log(keysPressed);
+      console.log(keysPressed);
     }
   }
 
   const upHandler = ({ key }) => {
-    //console.log(`keyup ${key}`);
+    console.log("UP")
+    console.log(typeof(key));
+    console.log(key)
     //array.splice(i, 1);
-    // indexOf
-    setKeyPressed(keysPressed.splice(keysPressed.indexOf(key, 1)));
+    //
+    console.log(`keysPressed up ${keysPressed}`)
+    const keyIndex = keysPressed.indexOf(key)
+    console.log(keyIndex)
+    setKeyPressed(keysPressed.splice(keyIndex,1));
     console.log(keysPressed);
   };
-
-  useEffect(() => {
     window.addEventListener("keydown", downHandler);
     window.addEventListener("keyup", upHandler);
     return () => {
@@ -27,5 +34,5 @@ export default function useMultiKey() {
     };
   }, []); // Empty array ensures that effect is only run on mount and unmount
 
-  return keysPressed;
+ return keysPressed;
 }

@@ -6,7 +6,9 @@ import useMultiKey from "../utils/useMultiKey";
 const Level = () => {
   const leftKey = useKey("ArrowLeft");
   const rightKey = useKey("ArrowRight");
+  const keysPressed = useMultiKey();
   const [idledir, setIdledir] = useState("right");
+  const [playerClasses, setPlayerClasses] = useState(["player right"])
 
   const handleDir = e => {
     if (idledir !== e) {
@@ -15,24 +17,38 @@ const Level = () => {
     }
   };
 
-  const keysPressed = useMultiKey();
 
   //console.log(keysPressed);
 
-  /*  if (leftKey) {
-    handleDir("left");
-  }
+  // if (leftKey) {
+  //   handleDir("left");
+  // }
 
-  if (rightKey) {
-    handleDir("right");
-  }
-*/
-  const playerClasses = () => {
-    if (keysPressed[keysPressed.length - 1] === "ArrowRight") {
-      return `player ${idledir} dirRight`;
-    }
-    return `player ${idledir} `;
-  };
+  // if (rightKey) {
+  //   handleDir("right");
+  // }
+
+  useEffect(()=>{
+    console.log("effect")
+    const GetPlayerClasses = () => {
+      console.log("playerClasse")
+      console.log({keysPressed})
+      if (keysPressed[keysPressed.length - 1] === "ArrowRight") {
+        setIdledir("right")
+        setPlayerClasses(`player ${idledir} moving`);
+      }
+      else if (keysPressed[keysPressed.length - 1] === "ArrowLeft") {
+        setIdledir("left")
+        setPlayerClasses(`player ${idledir} moving`);
+      }
+      else {
+        setPlayerClasses(`player ${idledir}`);
+      }
+
+    };
+      GetPlayerClasses()
+  },[setIdledir, playerClasses, setPlayerClasses, keysPressed])
+
 
   return (
     <div className="level">
@@ -40,7 +56,7 @@ const Level = () => {
         {leftKey && "left"}
         {rightKey && "right"}
       </p>
-      <div className={playerClasses()} />
+      <div className={playerClasses} />
     </div>
   );
 };

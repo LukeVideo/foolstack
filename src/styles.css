@@ -37,13 +37,10 @@ a {
     background-position: -768px 0px;
   }
 }
-.dirRight{
-  transform: scaleX(-1);
+.moving{
   animation: play 0.6s steps(3) infinite;
 }
-.dirLeft{
-  animation: play 0.6s steps(3) infinite;
-}
+
 .right{
   transform: scaleX(-1);
 }
